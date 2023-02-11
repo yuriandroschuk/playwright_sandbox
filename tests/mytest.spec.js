@@ -1,20 +1,16 @@
 import { test, expect } from '@playwright/test';
 
 test('Testing google', async ({ page }) => {
-  await page.goto('https://www.google.com/');
+  await page.goto('https://playwright.dev/');
 //   await page.pause()
-  await page.locator('[name=q]').click()
-  await page.locator('[name=q]').fill('this is a test')
-  await page.locator('[name=q]').press('Enter')
-  
-  //Here we're typing instead of filling (fun!)
-  await page.locator('[name=q]').type('NOOOOOOOOO THIS IS THE TEST')
-
-if (await page.getByText('Увійти').isDisabled()) {
-    await page.getByRole('link', { name: 'Google' }).click()
-}
-else {
-    await page.getByText('Увійти').click()
+  await page.locator('[class=getStarted_Sjon]').click()
+  await page.getByRole('button', { name: 'Search' }).click()
+  await page.locator('[class=DocSearch--active]').type('locators')
+  await page.getByRole('option', { name: 'Locators', exact: true }).getByRole('link', { name: 'Locators' }).click()
+  await expect(page).toHaveURL(/locators/)
+//   await page.pause()
+  if(page.getByRole('button', { name: 'Switch between dark and light mode (currently dark mode)' })){
+    page.getByRole('button', { name: 'Switch between dark and light mode (currently dark mode)' }).click
   }
-  await expect(page).toHaveURL(/accounts.google.com/)
+  else(page.getByRole('button', { name: 'Switch between dark and light mode (currently light mode)' }).click())
 });
