@@ -1,11 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test('Testing google', async ({ page }) => {
-  await page.goto('https://www.google.com/');
-  if(page.getByRole('button', { name: 'Ні, дякую' }).isVisible) {
-     page.getByRole('button', { name: 'Ні, дякую' }).click()
-   }
-//   await page.pause()
   await page.locator('[name=q]').click()
   await page.locator('[name=q]').fill('this is a test')
   await page.locator('[name=q]').press('Enter')
